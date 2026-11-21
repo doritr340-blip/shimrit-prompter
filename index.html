@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#FEF4EA">
+<meta name="color-scheme" content="light">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="פרומפטר">
+<title>הפרומפטר של שמרית</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<style>
+@font-face{font-family:Heebo;font-style:normal;font-display:swap;font-weight:400;src:url(fonts/heebo-hebrew-400.woff2) format('woff2');unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
+@font-face{font-family:Heebo;font-style:normal;font-display:swap;font-weight:500;src:url(fonts/heebo-hebrew-500.woff2) format('woff2');unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
+@font-face{font-family:Heebo;font-style:normal;font-display:swap;font-weight:700;src:url(fonts/heebo-hebrew-700.woff2) format('woff2');unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
+@font-face{font-family:Heebo;font-style:normal;font-display:swap;font-weight:800;src:url(fonts/heebo-hebrew-800.woff2) format('woff2');unicode-range:U+0307-0308,U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
+@font-face{font-family:Heebo;font-style:normal;font-display:swap;font-weight:400;src:url(fonts/heebo-latin-400.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:Heebo;font-style:normal;font-display:swap;font-weight:500;src:url(fonts/heebo-latin-500.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:Heebo;font-style:normal;font-display:swap;font-weight:700;src:url(fonts/heebo-latin-700.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:Heebo;font-style:normal;font-display:swap;font-weight:800;src:url(fonts/heebo-latin-800.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+
+:root{--cream:#FEF4EA;--peri:#7887DB;--peri-d:#4d5bb0;--coral:#DD7E7C;--ink:#2b2b45;--muted:#6b6b82;--ok:#3f9c72;--rec:#E5484D;--eye:#FFD54A;
+  --st:env(safe-area-inset-top,0px);--sb:env(safe-area-inset-bottom,0px);--sl:env(safe-area-inset-left,0px);--sr:env(safe-area-inset-right,0px)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;min-height:100%;background:var(--cream)}
+body{font-family:Heebo,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%;overscroll-behavior-y:none}
+button,input,textarea{font:inherit;color:inherit}
+button{border:0;background:none;padding:0;cursor:pointer;-webkit-user-select:none;user-select:none}
+[hidden]{display:none!important}
+svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.wrap{max-width:640px;margin:0 auto;padding:calc(16px + var(--st)) 18px calc(124px + var(--sb))}
+
+/* library */
+.brand{display:flex;align-items:center;gap:14px;margin:8px 2px 20px}
+.brand img{width:54px;height:54px;border-radius:16px;box-shadow:0 8px 18px rgba(77,91,176,.25);flex:none}
+.brand h1{font-size:23px;font-weight:800;margin:0 0 2px;line-height:1.2}
+.brand p{margin:0;color:var(--muted);font-size:15px;line-height:1.45}
+.group{font-size:14px;font-weight:700;color:var(--muted);margin:22px 6px 10px}
+.card{display:flex;background:#fff;border-radius:22px;box-shadow:0 8px 24px rgba(120,135,219,.13);margin-bottom:12px;overflow:hidden}
+.card-main{flex:1;min-width:0;text-align:right;padding:16px 18px 14px}
+.card h2{font-size:18px;font-weight:800;margin:0 0 4px;line-height:1.3}
+.card .pre{font-size:14.5px;line-height:1.5;color:#55556a;margin:0 0 10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font-size:12.5px;font-weight:700;border-radius:999px;padding:3px 10px;background:rgba(120,135,219,.13);color:var(--peri-d);white-space:nowrap}
+.chip.t-reel{background:var(--peri);color:#fff}.chip.t-story{background:#97a3ea;color:#fff}.chip.t-training{background:var(--coral);color:#fff}.chip.t-other{background:var(--ink);color:#fff}
+.chip.ok{background:rgba(63,156,114,.14);color:var(--ok)}
+.side{display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:8px;padding:12px 10px;border-inline-start:1px solid rgba(43,43,69,.08)}
+.tick{width:38px;height:38px;border-radius:50%;border:2px solid #d6daf2;display:grid;place-items:center;color:transparent}
+.tick svg{width:20px;height:20px;stroke-width:3}
+.tick[aria-pressed="true"]{background:var(--ok);border-color:var(--ok);color:#fff}
+.ibtn{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;color:var(--peri-d)}
+.ibtn:active{background:rgba(120,135,219,.12)}
+.card.done{opacity:.62}
+.empty{text-align:center;background:#fff;border-radius:24px;padding:28px 22px;box-shadow:0 8px 24px rgba(120,135,219,.13)}
+.empty h2{font-size:19px;margin:0 0 8px}
+.empty p{margin:0;color:var(--muted);line-height:1.6;font-size:15.5px}
+.dock{position:fixed;left:0;right:0;bottom:0;padding:18px 18px calc(16px + var(--sb));background:linear-gradient(rgba(254,244,234,0),var(--cream) 45%);display:flex;justify-content:center;z-index:5}
+.btn{min-height:52px;border-radius:999px;padding:0 26px;font-weight:800;font-size:17px;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:transform .1s}
+.btn:active{transform:scale(.97)}
+.btn svg{width:22px;height:22px}
+.btn.primary{background:var(--peri);color:#fff;box-shadow:0 10px 22px rgba(77,91,176,.3)}
+.btn.ghost{background:#fff;color:var(--peri-d);box-shadow:inset 0 0 0 1.5px var(--peri)}
+.btn.soft{background:rgba(120,135,219,.13);color:var(--peri-d)}
+.btn.wide{width:100%;max-width:440px}
+.btn.sm{min-height:40px;font-size:15px;padding:0 16px}
+.btn.danger{color:#b24f4d}
+.install{display:flex;align-items:center;gap:12px;background:#fff;border-radius:18px;padding:12px 14px;margin:18px 0 0;font-size:14.5px;line-height:1.45;color:#55556a}
+.hint{font-size:14px;color:var(--muted);text-align:center;margin:18px 8px 0;line-height:1.6}
+
+/* shared top bar */
+.topbar{display:flex;align-items:center;gap:4px;margin:0 -8px 6px}
+.topbar h1{font-size:19px;font-weight:800;margin:0;flex:1;min-width:0;line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* editor */
+.lbl{display:block;font-size:14px;font-weight:700;color:var(--muted);margin:16px 4px 8px}
+.seg{display:flex;gap:8px;flex-wrap:wrap}
+.seg button{min-height:42px;padding:0 16px;border-radius:999px;background:#fff;font-weight:700;font-size:15.5px;box-shadow:inset 0 0 0 1.5px #e2e0ee;color:var(--ink)}
+.seg button[aria-pressed="true"]{background:var(--peri);color:#fff;box-shadow:none}
+.help{font-size:14px;color:var(--muted);margin:8px 4px 0;line-height:1.5}
+.inp,.ta{width:100%;border:0;border-radius:16px;background:#fff;box-shadow:inset 0 0 0 1.5px #e2e0ee;font-size:17px;padding:13px 15px;outline:none;color:var(--ink)}
+.ta{min-height:40vh;line-height:1.65;resize:vertical;display:block}
+.inp:focus,.ta:focus{box-shadow:inset 0 0 0 2px var(--peri)}
+.tools{display:flex;align-items:center;justify-content:space-between;margin:8px 2px 0;gap:10px}
+.count{font-size:14px;color:var(--muted)}
+.edfoot{display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:20px}
+
+/* guide */
+.notice{border-radius:16px;padding:12px 14px;font-size:15px;line-height:1.55;margin:14px 0 4px;background:#fff1df;color:#7a4a12}
+.notice.ok{background:rgba(63,156,114,.11);color:#2b6a4d}
+.sec{font-size:15px;font-weight:800;color:var(--muted);margin:22px 4px 10px}
+.tips{list-style:none;margin:0;padding:0}
+.tip{display:flex;gap:14px;background:#fff;border-radius:18px;padding:14px 16px;margin-bottom:10px;box-shadow:0 6px 18px rgba(120,135,219,.10)}
+.tip .ic{width:42px;height:42px;border-radius:13px;background:rgba(120,135,219,.13);color:var(--peri-d);display:grid;place-items:center;flex:none}
+.tip.key .ic{background:var(--peri);color:#fff}
+.tip b{display:block;font-size:16.5px;font-weight:800;margin:1px 0 3px}
+.tip span{display:block;font-size:14.5px;line-height:1.55;color:#55556a}
+
+/* prompter */
+.pv{position:fixed;inset:0;background:#000;color:#fff;overflow:hidden;-webkit-user-select:none;user-select:none;touch-action:manipulation;z-index:10}
+#cam{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#15151d}
+#cam.mirror{transform:scaleX(-1)}
+.panel{position:absolute;top:0;left:0;right:0;height:var(--ph,44vh);z-index:2;background:linear-gradient(to bottom,rgba(12,12,24,var(--dim,.45)) 0,rgba(12,12,24,calc(var(--dim,.45)*.85)) 80%,rgba(12,12,24,0) 100%)}
+.pv.land .panel{bottom:0;height:auto;width:var(--pw,44vw)}
+.pv.lens-left .panel{left:0;right:auto;background:linear-gradient(to right,rgba(12,12,24,var(--dim,.5)) 0,rgba(12,12,24,calc(var(--dim,.5)*.85)) 84%,rgba(12,12,24,0) 100%)}
+.pv.lens-right .panel{right:0;left:auto;background:linear-gradient(to left,rgba(12,12,24,var(--dim,.5)) 0,rgba(12,12,24,calc(var(--dim,.5)*.85)) 84%,rgba(12,12,24,0) 100%)}
+.vp{position:absolute;top:var(--st);left:0;right:0;bottom:0;overflow:hidden;touch-action:none;cursor:grab;
+  -webkit-mask-image:linear-gradient(to bottom,rgba(0,0,0,.32) 0,rgba(0,0,0,.32) calc(var(--rl,90px) - var(--lh,48px)*.55),#000 calc(var(--rl,90px) + var(--lh,48px)*.1),#000 86%,transparent 100%);
+  mask-image:linear-gradient(to bottom,rgba(0,0,0,.32) 0,rgba(0,0,0,.32) calc(var(--rl,90px) - var(--lh,48px)*.55),#000 calc(var(--rl,90px) + var(--lh,48px)*.1),#000 86%,transparent 100%)}
+.pv.land .vp{bottom:var(--sb)}
+.pv.lens-left .vp{left:var(--sl)}.pv.lens-right .vp{right:var(--sr)}
+.ptext{position:absolute;top:0;left:0;right:0;margin:0 auto;width:var(--tw,90%);padding:var(--rl,90px) 0 var(--pb,200px);font-size:var(--fs,34px);line-height:1.42;font-weight:700;text-align:var(--ta,right);will-change:transform;text-shadow:0 1px 3px rgba(0,0,0,.8),0 0 16px rgba(0,0,0,.35)}
+.ptext p{margin:0 0 .5em}
+.ptext .end{color:rgba(255,255,255,.5);font-size:.55em;text-align:center;margin-top:1em}
+.marker{position:absolute;right:3px;top:calc(var(--st) + var(--rl,90px) + var(--lh,48px)/2);transform:translateY(-50%);width:0;height:0;border-top:10px solid transparent;border-bottom:10px solid transparent;border-right:13px solid var(--coral);filter:drop-shadow(0 1px 2px rgba(0,0,0,.5));pointer-events:none}
+.pv.lens-left .marker{right:6px}
+.prog{position:absolute;left:14px;right:14px;bottom:8px;height:3px;border-radius:2px;background:rgba(255,255,255,.18);overflow:hidden;pointer-events:none}
+.prog i{display:block;height:100%;background:var(--peri);transform-origin:right center;transform:scaleX(0)}
+.pv.land .prog{bottom:calc(8px + var(--sb))}
+
+.hud{position:absolute;left:0;right:0;bottom:0;z-index:3;padding:18px 12px calc(14px + var(--sb));display:flex;flex-direction:column;align-items:center;gap:12px;background:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.5))}
+.pv.lens-left .hud{left:var(--pw,44vw);right:0}.pv.lens-right .hud{right:var(--pw,44vw);left:0}
+.status{display:flex;align-items:center;gap:8px;height:32px;padding:0 12px;border-radius:999px;background:rgba(18,18,30,.55);font-size:14px;font-weight:700;font-variant-numeric:tabular-nums}
+.status svg{width:16px;height:16px}
+.rdot{width:9px;height:9px;border-radius:50%;background:var(--rec);animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:.2}}
+.meter{width:44px;height:6px;border-radius:3px;background:rgba(255,255,255,.22);overflow:hidden}
+.meter i{display:block;height:100%;background:#7ee2a8;transform-origin:right center;transform:scaleX(0)}
+.adjust{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.stepper{display:flex;align-items:center;height:44px;border-radius:999px;background:rgba(18,18,30,.55);padding:0 2px}
+.stepper button{width:42px;height:42px;border-radius:50%;display:grid;place-items:center}
+.stepper button:active{background:rgba(255,255,255,.16)}
+.stepper span{min-width:72px;text-align:center;font-size:14.5px;font-weight:700;white-space:nowrap}
+.row{display:flex;align-items:center;justify-content:center;gap:16px}
+.round{width:50px;height:50px;border-radius:50%;background:rgba(18,18,30,.55);display:grid;place-items:center;color:#fff}
+.round:active{background:rgba(255,255,255,.22)}
+.round:disabled{opacity:.3}
+.rec{width:76px;height:76px;border-radius:50%;box-shadow:inset 0 0 0 4px #fff;display:grid;place-items:center}
+.rec i{width:56px;height:56px;border-radius:50%;background:var(--rec);transition:all .2s}
+.rec.on i{width:28px;height:28px;border-radius:7px}
+.rec.arming i{animation:pulse .7s ease-in-out infinite alternate}
+.rec:disabled{opacity:.45}
+@keyframes pulse{to{transform:scale(.84);opacity:.7}}
+.pv.recording .hide-rec{visibility:hidden}
+
+.countdown{position:absolute;inset:0;display:grid;place-items:center;z-index:6;font-size:140px;font-weight:800;color:#fff;text-shadow:0 6px 30px rgba(0,0,0,.6);pointer-events:none}
+.countdown b{display:block;animation:cd .9s ease-out both}
+@keyframes cd{from{transform:scale(1.4);opacity:0}30%{opacity:1}to{transform:scale(1);opacity:1}}
+
+.guides{position:absolute;inset:0;z-index:2;pointer-events:none}
+.gl{position:absolute;background:rgba(255,255,255,.55);box-shadow:0 0 2px rgba(0,0,0,.4)}
+.gl.h{left:0;right:0;height:1px}
+.gl.v{top:0;bottom:0;width:1px}
+.gl.eye{height:3px;margin-top:-1px;background:var(--eye)}
+.eye-l{position:absolute;right:14px;transform:translateY(-135%);background:var(--eye);color:#2b2b45;font-weight:800;font-size:14px;padding:3px 11px;border-radius:999px}
+.zone{position:absolute;left:0;right:0;background:repeating-linear-gradient(-45deg,rgba(0,0,0,.32) 0 10px,rgba(0,0,0,.16) 10px 20px);display:flex;align-items:center;justify-content:center;text-align:center;padding:0 12px}
+.zone span{font-size:13px;font-weight:700;background:rgba(18,18,30,.62);padding:4px 11px;border-radius:999px}
+.zone.top{top:0;align-items:flex-end;padding-bottom:8px}.zone.bottom{bottom:0;align-items:flex-start;padding-top:10px}
+
+.setup{position:absolute;left:12px;right:12px;bottom:calc(14px + var(--sb));z-index:4;background:rgba(254,244,234,.97);color:var(--ink);border-radius:22px;padding:16px 18px;box-shadow:0 12px 30px rgba(0,0,0,.3);max-width:520px;margin:0 auto}
+.pv.land .setup{left:auto;right:calc(12px + var(--sr));width:min(440px,46%);margin:0}
+.setup h3{margin:0 0 6px;font-size:18px;font-weight:800}
+.setup ol{margin:0 0 14px;padding:0 20px 0 0;font-size:15px;line-height:1.5}
+.setup li{margin:3px 0}
+.acts{display:flex;gap:10px;flex-wrap:wrap}
+.acts .btn{flex:1;white-space:nowrap;padding:0 14px}
+#setupDone{flex:1.7}
+.dlg-c .acts{flex-direction:column}
+.acts .btn.mini{flex:none;width:52px;padding:0}
+.setup.min{padding:12px}
+.setup.min h3,.setup.min ol{display:none}
+.in-pv .toast{bottom:auto;top:50%}
+
+.rotate{position:absolute;inset:0;z-index:7;background:rgba(18,18,30,.84);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;gap:8px}
+.rotate svg{width:72px;height:72px;stroke-width:1.5}
+.rotate.to-land svg{animation:rotL 1.8s ease-in-out infinite}
+.rotate.to-port svg{animation:rotP 1.8s ease-in-out infinite}
+@keyframes rotL{0%,25%{transform:rotate(0)}60%,100%{transform:rotate(-90deg)}}
+@keyframes rotP{0%,25%{transform:rotate(-90deg)}60%,100%{transform:rotate(0)}}
+.rotate h3{margin:8px 0 0;font-size:22px;font-weight:800}
+.rotate p{margin:0;font-size:15px;opacity:.86;max-width:330px;line-height:1.55}
+
+.cammsg{position:absolute;left:16px;right:16px;top:50%;transform:translateY(-50%);z-index:8;background:var(--cream);color:var(--ink);border-radius:22px;padding:20px;max-width:440px;margin:0 auto;box-shadow:0 12px 30px rgba(0,0,0,.35)}
+.cammsg h3{margin:0 0 8px;font-size:19px;font-weight:800}
+.cammsg p{margin:0 0 14px;line-height:1.6;font-size:15px;color:#4a4a60}
+
+.sheet{position:absolute;inset:0;z-index:9;background:rgba(10,10,20,.5);display:flex;align-items:flex-end;justify-content:center}
+.sheet-c{width:100%;max-width:560px;max-height:90%;overflow:auto;background:var(--cream);color:var(--ink);border-radius:26px 26px 0 0;padding:18px 20px calc(20px + var(--sb));-webkit-overflow-scrolling:touch}
+.pv.land .sheet{align-items:center}.pv.land .sheet-c{border-radius:22px;max-height:94%}
+.sheet h3{margin:0 0 2px;font-size:19px;font-weight:800}
+.sheet .sub{margin:0 0 6px;font-size:13.5px;color:var(--muted)}
+.set{margin:16px 0}
+.set .top{display:flex;justify-content:space-between;align-items:baseline;font-weight:700;font-size:15px;margin-bottom:4px}
+.set output{font-weight:800;color:var(--peri-d);font-variant-numeric:tabular-nums}
+.set input[type=range]{width:100%;accent-color:var(--peri);height:30px;margin:0}
+.set small{display:block;color:var(--muted);font-size:13px;margin-top:2px;line-height:1.5}
+.set .seg button{min-height:38px;font-size:14.5px;padding:0 14px}
+.switch{display:flex;align-items:center;justify-content:space-between;gap:12px;font-weight:700;font-size:15px}
+.switch input{width:24px;height:24px;accent-color:var(--peri);flex:none}
+.review video{width:100%;max-height:46vh;border-radius:16px;background:#000;display:block}
+.pv.land .review video{max-height:50vh}
+.rmeta{font-size:14px;color:var(--muted);margin:8px 2px 14px}
+.stack{display:flex;flex-direction:column;gap:10px}
+.two{display:flex;gap:10px}.two .btn{flex:1}
+.note{font-size:14px;color:var(--ok);margin:10px 2px 0;line-height:1.5;font-weight:600}
+
+.dlg{position:fixed;inset:0;z-index:50;background:rgba(10,10,20,.5);display:flex;align-items:center;justify-content:center;padding:20px}
+.dlg-c{background:var(--cream);color:var(--ink);border-radius:22px;padding:20px;max-width:380px;width:100%;box-shadow:0 12px 30px rgba(0,0,0,.3)}
+.dlg-c h3{margin:0 0 6px;font-size:18px;font-weight:800}
+.dlg-c p{margin:0 0 16px;color:#4a4a60;line-height:1.55}
+.toast{position:fixed;left:50%;bottom:calc(150px + var(--sb));transform:translate(-50%,16px);opacity:0;z-index:60;background:rgba(30,30,46,.93);color:#fff;font-size:15px;font-weight:600;padding:10px 16px;border-radius:14px;width:max-content;max-width:min(92vw,460px);text-align:center;line-height:1.45;transition:opacity .25s,transform .25s;pointer-events:none}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+</head>
+<body>
+
+<!-- ספריית התסריטים -->
+<section id="libraryView" class="view">
+  <div class="wrap">
+    <div class="brand">
+      <img src="icons/icon-192.png" alt="">
+      <div>
+        <h1>הפרומפטר של שמרית</h1>
+        <p>מדביקים טקסט, בוחרים סוג סרטון, ומצלמים כשהטקסט רץ ליד העדשה.</p>
+      </div>
+    </div>
+    <div id="list"></div>
+    <div id="installBox" class="install" hidden>
+      <span>אפשר להתקין את הפרומפטר כאפליקציה, והוא ייפתח מסמל במסך הבית.</span>
+      <button id="installBtn" class="btn ghost sm" type="button">התקנה</button>
+    </div>
+    <p id="iosHint" class="hint" hidden>כדי לפתוח את הפרומפטר מסמל במסך הבית: בספארי לוחצים על כפתור השיתוף, ואז על הוספה למסך הבית.</p>
+  </div>
+  <div class="dock"><button id="newBtn" class="btn primary wide" type="button"></button></div>
+</section>
+
+<!-- עריכה -->
+<section id="editorView" class="view" hidden>
+  <div class="wrap">
+    <div class="topbar">
+      <button class="ibtn" data-back type="button" aria-label="חזרה"></button>
+      <h1 id="edHead">תסריט חדש</h1>
+    </div>
+    <span class="lbl">סוג הסרטון</span>
+    <div class="seg" id="edType" role="radiogroup" aria-label="סוג הסרטון"></div>
+    <p class="help" id="edTypeHelp"></p>
+    <div id="edOrientWrap">
+      <span class="lbl">איך מצלמים</span>
+      <div class="seg" id="edOrient" role="radiogroup" aria-label="כיוון הצילום"></div>
+    </div>
+    <label class="lbl" for="edTitle">שם הסרטון</label>
+    <input id="edTitle" class="inp" type="text" maxlength="80" placeholder="למשל: הבוקר מתחיל בלילה הקודם" autocomplete="off">
+    <label class="lbl" for="edText">הטקסט</label>
+    <textarea id="edText" class="ta" placeholder="מדביקים כאן את הטקסט שמקריאים בסרטון"></textarea>
+    <div class="tools">
+      <button id="pasteBtn" class="btn soft sm" type="button"></button>
+      <span id="edCount" class="count"></span>
+    </div>
+    <div class="edfoot">
+      <button id="saveBtn" class="btn primary wide" type="button">שמירה</button>
+      <button id="delBtn" class="btn danger sm" type="button">מחיקת התסריט</button>
+    </div>
+  </div>
+</section>
+
+<!-- לפני שמצלמים -->
+<section id="guideView" class="view" hidden>
+  <div class="wrap">
+    <div class="topbar">
+      <button class="ibtn" data-back type="button" aria-label="חזרה"></button>
+      <h1 id="gTitle"></h1>
+      <button class="ibtn" id="gEdit" type="button" aria-label="עריכת התסריט"></button>
+    </div>
+    <div class="chips" id="gChips"></div>
+    <div id="gLen" class="notice"></div>
+    <h2 class="sec">לפני שמצלמים</h2>
+    <ul class="tips" id="gTips"></ul>
+  </div>
+  <div class="dock"><button id="gOpen" class="btn primary wide" type="button"></button></div>
+</section>
+
+<!-- המצלמה והטקסט -->
+<section id="prompterView" class="view pv" hidden>
+  <video id="cam" playsinline muted autoplay></video>
+  <div id="guides" class="guides" hidden>
+    <div class="zone top" id="zTop"><span>כאן יופיעו שם החשבון והכפתורים</span></div>
+    <div class="zone bottom" id="zBot"><span>כאן יופיעו הכיתוב והכפתורים</span></div>
+    <div class="gl v" id="gx1"></div><div class="gl v" id="gx2"></div>
+    <div class="gl h" id="gy2"></div>
+    <div class="gl h eye" id="gy1"></div>
+    <span class="eye-l" id="eyeL">העיניים כאן</span>
+  </div>
+  <div id="panel" class="panel">
+    <div id="vp" class="vp"><div id="ptext" class="ptext"></div></div>
+    <i class="marker"></i>
+    <div class="prog"><i id="prog"></i></div>
+  </div>
+  <div id="countdown" class="countdown" hidden></div>
+  <div id="setupCard" class="setup" hidden>
+    <h3>מסדרים את הפריים</h3>
+    <ol id="setupList"></ol>
+    <div class="acts">
+      <button id="setupDone" class="btn primary" type="button">הפריים מוכן</button>
+      <button id="setupBack" class="btn ghost" type="button">חזרה</button>
+      <button id="setupMin" class="btn ghost mini" type="button" aria-label="הסתרת ההסבר"></button>
+    </div>
+  </div>
+  <div id="hud" class="hud">
+    <div class="status"><span class="rdot" id="rdot" hidden></span><span id="stIc"></span><span id="stTime">0:00</span><span class="meter" id="meterBox"><i id="meter"></i></span></div>
+    <div class="adjust">
+      <div class="stepper"><button type="button" data-step="fs-" aria-label="הקטנת הטקסט">−</button><span>גודל <b id="fsVal"></b></span><button type="button" data-step="fs+" aria-label="הגדלת הטקסט">+</button></div>
+      <div class="stepper"><button type="button" data-step="sp-" aria-label="האטה">−</button><span>מהירות <b id="spVal"></b></span><button type="button" data-step="sp+" aria-label="האצה">+</button></div>
+    </div>
+    <div class="row">
+      <button id="pBack" class="round hide-rec" type="button" aria-label="חזרה"></button>
+      <button id="pRestart" class="round" type="button" aria-label="חזרה לתחילת הטקסט"></button>
+      <button id="pRec" class="rec" type="button" aria-label="הקלטה"><i></i></button>
+      <button id="pPlay" class="round" type="button" aria-label="הפעלת הגלילה"></button>
+      <button id="pSet" class="round hide-rec" type="button" aria-label="התאמת התצוגה"></button>
+    </div>
+  </div>
+  <div id="rotate" class="rotate" hidden>
+    <svg viewBox="0 0 64 64"><rect x="21" y="8" width="22" height="48" rx="4"/><path d="M29 49h6"/></svg>
+    <h3 id="rotTitle"></h3>
+    <p id="rotText"></p>
+  </div>
+  <div id="camMsg" class="cammsg" hidden>
+    <h3 id="cmTitle"></h3>
+    <p id="cmText"></p>
+    <div class="acts">
+      <button id="cmRetry" class="btn primary sm" type="button">ניסיון נוסף</button>
+      <button id="cmBack" class="btn ghost sm" type="button">חזרה</button>
+    </div>
+  </div>
+  <div id="sheet" class="sheet" hidden>
+    <div class="sheet-c" role="dialog" aria-label="התאמת התצוגה">
+      <h3>התאמת התצוגה</h3>
+      <p class="sub" id="shSub"></p>
+      <div id="shBody"></div>
+      <div class="stack" style="margin-top:18px">
+        <button id="shGuides" class="btn soft" type="button">קווי העזר למיקום</button>
+        <div class="two">
+          <button id="shReset" class="btn ghost sm" type="button">הגדרות מקוריות</button>
+          <button id="shClose" class="btn primary sm" type="button">סגירה</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="review" class="sheet review" hidden>
+    <div class="sheet-c" role="dialog" aria-label="הטייק שצולם">
+      <h3 id="rvTitle"></h3>
+      <video id="takeVideo" playsinline controls preload="metadata"></video>
+      <p class="rmeta" id="rvMeta"></p>
+      <div class="stack">
+        <button id="rvSave" class="btn primary" type="button"></button>
+        <button id="rvShare" class="btn ghost" type="button"></button>
+        <div class="two">
+          <button id="rvRetake" class="btn soft sm" type="button">עוד טייק</button>
+          <button id="rvDone" class="btn soft sm" type="button">סיימתי עם הסרטון</button>
+        </div>
+      </div>
+      <p class="note" id="rvNote" hidden></p>
+    </div>
+  </div>
+</section>
+
+<div id="dlg" class="dlg" hidden>
+  <div class="dlg-c" role="alertdialog" aria-labelledby="dlgT">
+    <h3 id="dlgT"></h3>
+    <p id="dlgP"></p>
+    <div class="acts"><button id="dlgOk" class="btn primary sm" type="button"></button><button id="dlgNo" class="btn ghost sm" type="button"></button></div>
+  </div>
+</div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script>
+(() => {
+'use strict';
+
+/* ---------- כלים ---------- */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+const isIOS = /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+const isStandalone = () => matchMedia('(display-mode: standalone)').matches || matchMedia('(display-mode: fullscreen)').matches || navigator.standalone === true;
+const coarse = matchMedia('(pointer: coarse)').matches;
+
+const store = {
+  get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch (e) { return false; } }
+};
+const K_SCRIPTS = 'sp.scripts.v1', K_SET = 'sp.settings.v1', K_TIP = 'sp.tip.v1';
+
+const ICON = {
+  back: '<svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>',
+  plus: '<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>',
+  check: '<svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
+  edit: '<svg viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg>',
+  play: '<svg viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor" stroke="none"/></svg>',
+  pause: '<svg viewBox="0 0 24 24"><rect x="6.5" y="5" width="4" height="14" rx="1" fill="currentColor" stroke="none"/><rect x="13.5" y="5" width="4" height="14" rx="1" fill="currentColor" stroke="none"/></svg>',
+  restart: '<svg viewBox="0 0 24 24"><path d="M4.5 12a7.5 7.5 0 1 0 2.4-5.5"/><path d="M4.5 4v5h5"/></svg>',
+  tune: '<svg viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 12h3M11 12h9M4 17h11M19 17h1"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="17" cy="17" r="2"/></svg>',
+  clock: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>',
+  paste: '<svg viewBox="0 0 24 24"><rect x="5.5" y="4.5" width="13" height="16" rx="2"/><path d="M9 4.5h6v3H9z"/></svg>',
+  download: '<svg viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 20h14"/></svg>',
+  share: '<svg viewBox="0 0 24 24"><path d="M12 14V3.5M7.5 8L12 3.5 16.5 8"/><path d="M5 12v7a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 19v-7"/></svg>',
+  camera: '<svg viewBox="0 0 24 24"><path d="M3.5 8.5h3.5l2-3h6l2 3h3.5V19h-17z"/><circle cx="12" cy="13.2" r="3.6"/></svg>',
+  phoneV: '<svg viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2.2"/><path d="M11 5.5h2"/></svg>',
+  phoneH: '<svg viewBox="0 0 24 24"><rect x="2.5" y="7" width="19" height="10" rx="2.2"/><path d="M5.5 11v2"/></svg>',
+  person: '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="12" cy="10" r="3"/><path d="M6.5 21c.8-3.4 2.9-5.2 5.5-5.2s4.7 1.8 5.5 5.2"/></svg>',
+  eye: '<svg viewBox="0 0 24 24"><path d="M2.5 12S6 6 12 6s9.5 6 9.5 6S18 18 12 18 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.6"/></svg>',
+  sun: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6L6 6M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4L6 18M18 6l1.4-1.4"/></svg>',
+  image: '<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 16l5-5 4 4 3-3 6 6"/><circle cx="16" cy="9" r="1.4"/></svg>',
+  quiet: '<svg viewBox="0 0 24 24"><path d="M4 9.5v5h3.5l4.5 4v-13l-4.5 4z"/><path d="M16 9.5l4.5 5M20.5 9.5l-4.5 5"/></svg>',
+  stand: '<svg viewBox="0 0 24 24"><rect x="8" y="2.5" width="8" height="12.5" rx="1.6"/><path d="M12 15v3.5M7 21.5l5-3 5 3"/></svg>',
+  redo: '<svg viewBox="0 0 24 24"><path d="M19.5 12a7.5 7.5 0 1 1-2.4-5.5"/><path d="M19.5 4v5h-5"/></svg>',
+  battery: '<svg viewBox="0 0 24 24"><rect x="2.5" y="7" width="17" height="10" rx="2"/><path d="M21.5 10.5v3M6 10v4M9.5 10v4"/></svg>',
+  zones: '<svg viewBox="0 0 24 24"><rect x="6" y="2.5" width="12" height="19" rx="2"/><path d="M6 6.5h12M6 14.5h12"/></svg>'
+};
+
+/* ---------- סוגי סרטונים ---------- */
+const WPM = [0, 70, 85, 100, 110, 120, 130, 140, 155, 170, 190];
+const TYPES = {
+  reel:     { name: 'ריל',   help: 'לאינסטגרם, לפייסבוק או לטיקטוק. מצלמים לאורך, 9:16, כדי שהסרטון ימלא את כל המסך.', orient: 'portrait', fixed: true, kbps: 8000, zones: { top: .14, bottom: .35 } },
+  story:    { name: 'סטורי', help: 'לסטורי באינסטגרם או בפייסבוק. מצלמים לאורך, 9:16.', orient: 'portrait', fixed: true, kbps: 8000, zones: { top: .14, bottom: .20 } },
+  training: { name: 'הדרכה', help: 'הדרכה מצלמים בדרך כלל לרוחב, 16:9, כי ככה היא מתאימה ליוטיוב, לאתר ולשליחה בוואטסאפ.', orient: 'landscape', fixed: false, kbps: 6000, zones: null, preset: { landscape: { fontSize: 40 } } },
+  other:    { name: 'אחר',   help: 'כל סרטון אחר. בוחרים אם לצלם לאורך או לרוחב.', orient: 'portrait', fixed: false, kbps: 7000, zones: null }
+};
+const BASE = { fontSize: 34, speed: 5, panel: 38, width: 90, dim: 45, align: 'right', countdown: 3, mirror: true, side: 'auto' };
+const PRESET = { portrait: { fontSize: 34, panel: 38, width: 90, dim: 45 }, landscape: { fontSize: 38, panel: 44, width: 92, dim: 50 } };
+
+let allSettings = store.get(K_SET, {});
+if (!allSettings || typeof allSettings !== 'object') allSettings = {};
+const setKey = (type, orient) => type + '-' + orient;
+function sFor(type, orient) {
+  const t = TYPES[type] || TYPES.reel;
+  return Object.assign({}, BASE, PRESET[orient], (t.preset && t.preset[orient]) || {}, allSettings[setKey(type, orient)] || {});
+}
+function saveS() { allSettings[setKey(cur.type, cur.orient)] = S; store.set(K_SET, allSettings); }
+
+let scripts = store.get(K_SCRIPTS, []);
+if (!Array.isArray(scripts)) scripts = [];
+const saveScripts = () => store.set(K_SCRIPTS, scripts);
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+const countWords = t => (String(t).trim().match(/\S+/g) || []).length;
+const clock = sec => { sec = Math.max(0, Math.round(sec)); return Math.floor(sec / 60) + ':' + String(sec % 60).padStart(2, '0'); };
+function durText(sec) {
+  const r = Math.round(sec / 5) * 5;
+  if (r < 60) return 'כ־' + Math.max(5, r) + ' שניות';
+  if (r === 60) return 'כדקה';
+  if (r % 60 === 0) return 'כ־' + (r / 60) + ' דקות';
+  return 'כ־' + clock(r) + ' דקות';
+}
+const wordsText = n => n === 1 ? 'מילה אחת' : n + ' מילים';
+const estSec = s => countWords(s.text) / WPM[sFor(s.type, s.orient).speed] * 60;
+
+/* ---------- הנחיות צילום ---------- */
+const COMMON = [
+  { ic: 'stand', t: 'הטלפון יציב ובגובה העיניים', d: 'על חצובה או על משטח יציב. ככה הפרופורציות נשארות טבעיות, בלי זווית מלמטה או מלמעלה.' },
+  { ic: 'sun', t: 'אור מלפנים', d: 'הכי פשוט לשבת מול חלון. אם אין, נורת לד רכה או טבעת אור מאחורי הטלפון, בגובה העיניים. כשהאור מגיע מאחור, הפנים יוצאות כהות.' },
+  { ic: 'image', t: 'רקע נקי', d: 'מורידים מהפריים דברים שמושכים את העין. שעון על הקיר, למשל, מראה בין קטע לקטע שהזמן עבר.' },
+  { ic: 'quiet', t: 'שקט בחדר', d: 'מכבים מזגן או מאוורר, כי שומעים מהם זמזום ברקע. ומפעילים ״נא לא להפריע״, כדי ששיחה נכנסת לא תעצור את ההקלטה.' },
+  { ic: 'eye', t: 'מבט לעדשה', d: 'הטקסט רץ ממש ליד המצלמה, אז גם כשקוראים, המבט נשאר כמעט בעדשה.' },
+  { ic: 'redo', t: 'מתבלבלים? ממשיכים להקליט', d: 'לוקחים נשימה ומתחילים את המשפט מההתחלה. נגיעה בטקסט עוצרת אותו, וגרירה למטה מחזירה אותו אחורה. בעריכה חותכים את הטעות.' }
+];
+function typeTips(s) {
+  const port = s.orient === 'portrait', tips = [];
+  if (s.type === 'reel') tips.push({ ic: 'phoneV', key: true, t: 'מצלמים לאורך, 9:16', d: 'הטלפון עומד. ככה הסרטון ממלא את כל המסך באינסטגרם, בפייסבוק ובטיקטוק.' });
+  else if (s.type === 'story') tips.push({ ic: 'phoneV', key: true, t: 'מצלמים לאורך, 9:16', d: 'הטלפון עומד, והסטורי ממלא את כל המסך.' });
+  else if (s.type === 'training' && !port) tips.push({ ic: 'phoneH', key: true, t: 'מצלמים לרוחב, 16:9', d: 'הטלפון שוכב. זה הפורמט הרגיל של יוטיוב, והוא מתאים גם לאתר ולשליחה בוואטסאפ.' });
+  else if (port) tips.push({ ic: 'phoneV', key: true, t: 'מצלמים לאורך, 9:16', d: 'הטלפון עומד.' });
+  else tips.push({ ic: 'phoneH', key: true, t: 'מצלמים לרוחב, 16:9', d: 'הטלפון שוכב.' });
+
+  if (s.type === 'reel') tips.push({ ic: 'person', key: true, t: 'מהמותניים ומעלה', d: 'העיניים על הקו הצהוב שבמצלמה, בשליש העליון, ומעל הראש מרווח קטן.' });
+  else if (s.type === 'training') tips.push({ ic: 'person', key: true, t: 'קרוב, כמו בשיחה', d: 'הפריים נחתך בערך באמצע החזה, והעיניים על הקו הצהוב שבמצלמה. כשהטלפון קרוב, גם הסאונד יוצא נקי יותר.' });
+  else tips.push({ ic: 'person', key: true, t: 'העיניים בשליש העליון', d: 'על הקו הצהוב שבמצלמה, עם מרווח קטן מעל הראש.' });
+
+  if (s.type === 'reel') tips.push({ ic: 'zones', t: 'לא נמוך מדי בפריים', d: 'בחלק התחתון של המסך אינסטגרם מציג את הכיתוב והכפתורים. במצלמה האזור הזה מסומן, והפנים צריכות להיות מעליו.' });
+  if (s.type === 'training') tips.push({ ic: 'battery', t: 'סוללה ומקום', d: 'הקלטה ארוכה צורכת הרבה סוללה ומקום בטלפון. כדאי לחבר למטען לפני שמתחילים.' });
+  return tips;
+}
+function lengthNotice(s) {
+  const sec = estSec(s), d = durText(sec);
+  if (s.type === 'reel') {
+    if (sec <= 180) return { ok: true, t: `בקצב הנוכחי הקריאה תיקח ${d}. ריל של עד 3 דקות יכול להופיע גם בהמלצות לאנשים שעוד לא עוקבים אחרי החשבון.` };
+    return { ok: false, t: `בקצב הנוכחי הקריאה תיקח ${d}. ריל ארוך מ־3 דקות אינסטגרם לא ממליץ לקהל חדש, אז כדאי לקצר את הטקסט או לחלק אותו לשני סרטונים.` };
+  }
+  if (s.type === 'story') {
+    if (sec <= 60) return { ok: true, t: `בקצב הנוכחי הקריאה תיקח ${d}. באינסטגרם סטורי אחד מחזיק עד 60 שניות של וידאו, אז הטקסט נכנס בסטורי אחד.` };
+    return { ok: false, t: `בקצב הנוכחי הקריאה תיקח ${d}. באינסטגרם סטורי אחד מחזיק עד 60 שניות של וידאו, אז כדאי לחלק את הטקסט לכמה סטוריז.` };
+  }
+  return { ok: true, t: `בקצב הנוכחי הקריאה תיקח ${d}.` };
+}
+function setupSteps(s) {
+  if (s.orient === 'landscape') return ['הטלפון שוכב, יציב ובגובה העיניים.', 'העיניים על הקו הצהוב.', s.type === 'training' ? 'הפריים נחתך בערך באמצע החזה.' : 'מעל הראש נשאר מרווח קטן.'];
+  const a = ['הטלפון עומד, יציב ובגובה העיניים.', 'העיניים על הקו הצהוב.'];
+  if (s.type === 'reel') a.push('רואים אותך מהמותניים ומעלה, והפנים מעל האזור המסומן למטה.');
+  else if (s.type === 'story') a.push('הפנים מעל האזור המסומן למטה.');
+  else a.push('מעל הראש נשאר מרווח קטן.');
+  return a;
+}
+
+/* ---------- ניווט ---------- */
+let view = 'library';
+const VIEWS = ['library', 'editor', 'guide', 'prompter'];
+function show(name, push) {
+  VIEWS.forEach(v => { $('#' + v + 'View').hidden = v !== name; });
+  view = name;
+  $('meta[name=theme-color]').setAttribute('content', name === 'prompter' ? '#000000' : '#FEF4EA');
+  if (push) history.pushState({ v: name }, '');
+  document.body.classList.toggle('in-pv', name === 'prompter');
+  if (name !== 'prompter') window.scrollTo(0, 0);
+}
+function goBack() { if (history.state && history.state.v && history.state.v !== 'library') history.back(); else { show('library'); renderList(); } }
+$$('[data-back]').forEach(b => { b.innerHTML = ICON.back; b.addEventListener('click', goBack); });
+
+window.addEventListener('popstate', e => {
+  const target = (e.state && e.state.v) || 'library';
+  if (view === 'prompter' && target !== 'prompter') {
+    if (rec && rec.state === 'recording') { history.pushState({ v: 'prompter' }, ''); stopRec(); return; }
+    if (counting) { cancelCount = true; history.pushState({ v: 'prompter' }, ''); return; }
+    if (!$('#sheet').hidden) { closeSheet(); history.pushState({ v: 'prompter' }, ''); return; }
+    if (!$('#review').hidden && take && !take.saved) {
+      history.pushState({ v: 'prompter' }, '');
+      ask('הטייק הזה עוד לא נשמר', 'אם יוצאים עכשיו, הוא יימחק.', 'לצאת בלי לשמור', 'להישאר').then(ok => { if (ok) { take.saved = true; history.back(); } });
+      return;
+    }
+    closePrompter();
+  }
+  if (target === 'prompter' || (target === 'guide' && !cur) || (target === 'editor' && !edOpen)) { show('library'); renderList(); return; }
+  show(target);
+  if (target === 'library') renderList();
+  if (target === 'guide') renderGuide();
+});
+
+/* ---------- הודעות ---------- */
+let toastT = 0;
+function toast(msg, ms = 2800) { const t = $('#toast'); t.textContent = msg; t.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('on'), ms); }
+function ask(title, text, okLabel, noLabel) {
+  return new Promise(resolve => {
+    const d = $('#dlg');
+    $('#dlgT').textContent = title; $('#dlgP').textContent = text;
+    $('#dlgOk').textContent = okLabel; $('#dlgNo').textContent = noLabel;
+    const done = v => { d.hidden = true; $('#dlgOk').onclick = $('#dlgNo').onclick = null; resolve(v); };
+    $('#dlgOk').onclick = () => done(true); $('#dlgNo').onclick = () => done(false);
+    d.hidden = false;
+  });
+}
+
+/* ---------- רשימת התסריטים ---------- */
+$('#newBtn').innerHTML = ICON.plus + '<span>תסריט חדש</span>';
+$('#newBtn').addEventListener('click', () => openEditor(null));
+const byId = id => scripts.find(s => s.id === id);
+function typeChip(s, withOrient) {
+  const t = TYPES[s.type] || TYPES.reel;
+  let txt = t.name;
+  if (withOrient && (s.type === 'other' || (!t.fixed && s.orient !== t.orient))) txt += ' · ' + (s.orient === 'portrait' ? 'לאורך' : 'לרוחב');
+  return el('span', 'chip t-' + s.type, txt);
+}
+function renderList() {
+  const list = $('#list'); list.textContent = '';
+  if (!scripts.length) {
+    const e = el('div', 'empty');
+    e.append(el('h2', null, 'עוד אין כאן תסריטים'), el('p', null, 'מדביקים את הטקסט של הסרטון ובוחרים אם זה ריל, סטורי או הדרכה. הפרומפטר יודע לפתוח את המצלמה בהתאם.'));
+    list.append(e); return;
+  }
+  const todo = scripts.filter(s => !s.done), done = scripts.filter(s => s.done);
+  if (todo.length && done.length) list.append(el('h2', 'group', 'מחכים לצילום'));
+  todo.forEach(s => list.append(card(s)));
+  if (done.length) { list.append(el('h2', 'group', 'צולמו')); done.forEach(s => list.append(card(s))); }
+}
+function card(s) {
+  const a = el('article', 'card' + (s.done ? ' done' : ''));
+  const main = el('button', 'card-main'); main.type = 'button';
+  main.append(el('h2', null, s.title || 'בלי שם'));
+  main.append(el('p', 'pre', s.text.replace(/\s+/g, ' ').slice(0, 170)));
+  const ch = el('div', 'chips');
+  ch.append(typeChip(s, true), el('span', 'chip', wordsText(countWords(s.text))), el('span', 'chip', durText(estSec(s))));
+  if (s.done) ch.append(el('span', 'chip ok', 'צולם'));
+  main.append(ch);
+  main.addEventListener('click', () => openGuide(s.id));
+  const side = el('div', 'side');
+  const tk = el('button', 'tick'); tk.type = 'button'; tk.innerHTML = ICON.check;
+  tk.setAttribute('aria-pressed', s.done ? 'true' : 'false');
+  tk.setAttribute('aria-label', s.done ? 'להחזיר לרשימת הצילום' : 'סימון שצולם');
+  tk.addEventListener('click', () => { s.done = !s.done; saveScripts(); renderList(); });
+  const ed = el('button', 'ibtn'); ed.type = 'button'; ed.innerHTML = ICON.edit; ed.setAttribute('aria-label', 'עריכה');
+  ed.addEventListener('click', () => openEditor(s.id));
+  side.append(tk, ed);
+  a.append(main, side);
+  return a;
+}
+
+/* ---------- עריכה ---------- */
+let editing = null, edOpen = false, edType = 'reel', edOrient = 'portrait', delArmed = 0;
+$('#pasteBtn').innerHTML = ICON.paste + '<span>הדבקה</span>';
+function buildSeg(box, items, val, onPick) {
+  box.textContent = '';
+  items.forEach(([k, label]) => {
+    const b = el('button', null, label); b.type = 'button'; b.setAttribute('role', 'radio');
+    b.setAttribute('aria-pressed', k === val ? 'true' : 'false'); b.setAttribute('aria-checked', k === val ? 'true' : 'false');
+    b.addEventListener('click', () => onPick(k));
+    box.append(b);
+  });
+}
+function renderEdType() {
+  buildSeg($('#edType'), Object.keys(TYPES).map(k => [k, TYPES[k].name]), edType, k => { edType = k; edOrient = TYPES[k].orient; renderEdType(); updateCount(); });
+  $('#edTypeHelp').textContent = TYPES[edType].help;
+  $('#edOrientWrap').hidden = TYPES[edType].fixed;
+  buildSeg($('#edOrient'), [['portrait', 'לאורך'], ['landscape', 'לרוחב']], edOrient, k => { edOrient = k; renderEdType(); updateCount(); });
+}
+function openEditor(id) {
+  editing = id ? byId(id) : null;
+  edOpen = true;
+  $('#edHead').textContent = editing ? 'עריכת התסריט' : 'תסריט חדש';
+  $('#edTitle').value = editing ? editing.title : '';
+  $('#edText').value = editing ? editing.text : '';
+  edType = editing ? editing.type : 'reel';
+  edOrient = editing ? editing.orient : TYPES[edType].orient;
+  $('#delBtn').hidden = !editing; disarmDel();
+  renderEdType(); updateCount();
+  show('editor', true);
+}
+function updateCount() {
+  const t = $('#edText').value, n = countWords(t);
+  $('#edCount').textContent = n ? wordsText(n) + ' · ' + durText(n / WPM[sFor(edType, edOrient).speed] * 60) : '';
+}
+$('#edText').addEventListener('input', updateCount);
+$('#pasteBtn').addEventListener('click', async () => {
+  try {
+    const t = await navigator.clipboard.readText();
+    if (!t) { toast('הלוח ריק. מעתיקים את הטקסט ומנסים שוב.'); return; }
+    const ta = $('#edText');
+    ta.value = ta.value.trim() ? ta.value.replace(/\s*$/, '') + '\n\n' + t : t;
+    updateCount();
+  } catch (e) { toast('אפשר להדביק בלחיצה ארוכה בתוך תיבת הטקסט.'); $('#edText').focus(); }
+});
+$('#saveBtn').addEventListener('click', () => {
+  const text = $('#edText').value.replace(/\r/g, '').trim();
+  let title = $('#edTitle').value.trim();
+  if (!text) { toast('צריך להדביק טקסט.'); $('#edText').focus(); return; }
+  if (!title) { const w = text.split(/\s+/); title = w.slice(0, 5).join(' ') + (w.length > 5 ? '…' : ''); }
+  if (editing) Object.assign(editing, { title, text, type: edType, orient: edOrient, updated: Date.now() });
+  else scripts.unshift({ id: uid(), title, text, type: edType, orient: edOrient, done: false, created: Date.now() });
+  saveScripts(); edOpen = false; goBack();
+});
+function disarmDel() { delArmed = 0; $('#delBtn').textContent = 'מחיקת התסריט'; }
+$('#delBtn').addEventListener('click', () => {
+  if (!editing) return;
+  if (!delArmed) { delArmed = setTimeout(disarmDel, 4000); $('#delBtn').textContent = 'למחוק? לחיצה נוספת מוחקת'; return; }
+  clearTimeout(delArmed);
+  scripts = scripts.filter(s => s !== editing); saveScripts();
+  if (cur === editing) cur = null;
+  editing = null; edOpen = false;
+  history.replaceState({ v: 'library' }, ''); show('library'); renderList();
+  toast('התסריט נמחק.');
+});
+
+/* ---------- לפני שמצלמים ---------- */
+let cur = null;
+$('#gEdit').innerHTML = ICON.edit;
+$('#gEdit').addEventListener('click', () => { if (cur) openEditor(cur.id); });
+$('#gOpen').innerHTML = ICON.camera + '<span>פתיחת המצלמה</span>';
+function openGuide(id) { cur = byId(id); if (!cur) return; renderGuide(); show('guide', true); }
+function renderGuide() {
+  if (!cur) return;
+  $('#gTitle').textContent = cur.title;
+  const ch = $('#gChips'); ch.textContent = '';
+  ch.append(typeChip(cur, false), el('span', 'chip', (cur.orient === 'portrait' ? 'לאורך · 9:16' : 'לרוחב · 16:9')), el('span', 'chip', wordsText(countWords(cur.text))));
+  const ln = lengthNotice(cur), box = $('#gLen');
+  box.textContent = ln.t; box.className = 'notice' + (ln.ok ? ' ok' : '');
+  const ul = $('#gTips'); ul.textContent = '';
+  typeTips(cur).concat(COMMON).forEach(tp => {
+    const li = el('li', 'tip' + (tp.key ? ' key' : ''));
+    const ic = el('div', 'ic'); ic.innerHTML = ICON[tp.ic];
+    const tx = el('div'); tx.append(el('b', null, tp.t), el('span', null, tp.d));
+    li.append(ic, tx); ul.append(li);
+  });
+}
+$('#gOpen').addEventListener('click', () => {
+  if (!cur) return;
+  enterFullscreen();
+  openPrompter();
+});
+
+/* ---------- מסך מלא וכיוון ---------- */
+function enterFullscreen() {
+  const d = document.documentElement;
+  if (!coarse || isStandalone() || document.fullscreenElement || !d.requestFullscreen) { lockOrientation(); return; }
+  try { d.requestFullscreen({ navigationUI: 'hide' }).then(lockOrientation, lockOrientation); } catch (e) { lockOrientation(); }
+}
+function exitFullscreen() { try { if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(() => {}); } catch (e) {} }
+function lockOrientation() {
+  if (!cur || view !== 'prompter' && view !== 'guide') return;
+  try { if (screen.orientation && screen.orientation.lock) screen.orientation.lock(cur.orient === 'landscape' ? 'landscape' : 'portrait').catch(() => {}); } catch (e) {}
+}
+function unlockOrientation() { try { if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock(); } catch (e) {} }
+
+/* ---------- פרומפטר ---------- */
+let S = null, phase = 'setup', stream = null, hasAudio = false;
+let playing = false, pos = 0, maxPos = 0, v = 0, nWords = 1, painted = -1, drag = null;
+let raf = 0, last = 0, lastClock = 0;
+let rec = null, sink = null, recT0 = 0, take = null, takeNo = 0, counting = false, cancelCount = false;
+let actx = null, analyser = null, abuf = null, level = 0, wakeLock = null, aspectFixTried = false;
+const ptext = $('#ptext'), vp = $('#vp'), cam = $('#cam');
+
+$('#pBack').innerHTML = ICON.back; $('#pRestart').innerHTML = ICON.restart; $('#pSet').innerHTML = ICON.tune;
+$('#stIc').innerHTML = ICON.clock;
+
+function renderText(t) {
+  ptext.textContent = '';
+  t.split(/\n\s*\n/).map(x => x.trim()).filter(Boolean).forEach(par => {
+    const p = document.createElement('p');
+    par.split('\n').forEach((line, i) => { if (i) p.append(document.createElement('br')); p.append(line.trim()); });
+    ptext.append(p);
+  });
+  ptext.append(el('p', 'end', 'סוף הטקסט'));
+  nWords = Math.max(1, countWords(t));
+}
+
+async function openPrompter() {
+  S = sFor(cur.type, cur.orient);
+  takeNo = 0; take = null;
+  show('prompter', true);
+  renderText(cur.text);
+  pos = 0; setPlaying(false);
+  setRecUI(false);
+  $('#camMsg').hidden = true; $('#review').hidden = true; $('#sheet').hidden = true;
+  setPhase('setup');
+  applySettings();
+  startLoop();
+  lockScreen();
+  checkOrientation();
+  await startCamera();
+}
+function closePrompter() {
+  setPlaying(false);
+  cancelCount = true;
+  if (rec && rec.state !== 'inactive') { try { rec.onstop = null; rec.stop(); } catch (e) {} }
+  rec = null; sink = null;
+  stopStream(); stopMeter(); stopLoop(); releaseWake(); unlockOrientation(); exitFullscreen();
+  if (take) { try { URL.revokeObjectURL(take.url); } catch (e) {} take = null; }
+  ['#review', '#sheet', '#camMsg', '#rotate', '#countdown'].forEach(s => { $(s).hidden = true; });
+  $('#takeVideo').removeAttribute('src');
+}
+
+function setPhase(p) {
+  phase = p;
+  const setup = p === 'setup';
+  $('#guides').hidden = !setup; $('#setupCard').hidden = !setup;
+  $('#panel').hidden = setup; $('#hud').hidden = setup;
+  if (setup) {
+    setPlaying(false);
+    const ol = $('#setupList'); ol.textContent = '';
+    setupSteps(cur).forEach(t => ol.append(el('li', null, t)));
+    positionGuides();
+  } else {
+    layout();
+    if (!store.get(K_TIP, false)) { store.set(K_TIP, true); setTimeout(() => toast('נגיעה בטקסט עוצרת וממשיכה. גרירה מזיזה אותו למעלה ולמטה.', 4200), 400); }
+  }
+}
+$('#setupDone').addEventListener('click', () => setPhase('read'));
+const CHEV_DOWN = '<svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>', CHEV_UP = '<svg viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></svg>';
+function setMin(on) { $('#setupCard').classList.toggle('min', on); $('#setupMin').innerHTML = on ? CHEV_UP : CHEV_DOWN; $('#setupMin').setAttribute('aria-label', on ? 'הצגת ההסבר' : 'הסתרת ההסבר'); }
+setMin(false);
+$('#setupMin').addEventListener('click', () => setMin(!$('#setupCard').classList.contains('min')));
+$('#setupBack').addEventListener('click', goBack);
+
+const probe = el('div'); probe.style.cssText = 'position:fixed;left:0;top:0;visibility:hidden;pointer-events:none;padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px)';
+document.body.append(probe);
+function safe() { const c = getComputedStyle(probe); return { t: parseFloat(c.paddingTop) || 0, r: parseFloat(c.paddingRight) || 0, b: parseFloat(c.paddingBottom) || 0, l: parseFloat(c.paddingLeft) || 0 }; }
+function lensSide() {
+  if (S.side === 'left' || S.side === 'right') return S.side;
+  let ang = 90;
+  if (screen.orientation && typeof screen.orientation.angle === 'number') ang = screen.orientation.angle;
+  else if (typeof window.orientation === 'number') ang = window.orientation;
+  return (ang === 270 || ang === -90) ? 'right' : 'left';
+}
+
+function applySettings() {
+  const pv = $('#prompterView');
+  pv.style.setProperty('--fs', S.fontSize + 'px');
+  pv.style.setProperty('--ta', S.align);
+  pv.style.setProperty('--dim', (S.dim / 100).toFixed(2));
+  cam.classList.toggle('mirror', !!S.mirror);
+  $('#fsVal').textContent = S.fontSize; $('#spVal').textContent = S.speed;
+  layout();
+}
+function layout() {
+  if (view !== 'prompter' || !S) return;
+  const pv = $('#prompterView');
+  const W = window.innerWidth, H = window.innerHeight, land = W > H, sf = safe();
+  const side = land ? lensSide() : null;
+  pv.classList.toggle('land', land);
+  pv.classList.toggle('lens-left', side === 'left');
+  pv.classList.toggle('lens-right', side === 'right');
+  let vpH;
+  if (land) { pv.style.setProperty('--pw', Math.round(W * S.panel / 100) + 'px'); vpH = H - sf.t - sf.b; pv.style.setProperty('--tw', '92%'); }
+  else { const ph = Math.round(H * S.panel / 100); pv.style.setProperty('--ph', ph + 'px'); vpH = ph - sf.t; pv.style.setProperty('--tw', S.width + '%'); }
+  const lh = Math.round(S.fontSize * 1.42);
+  const rl = land ? Math.round(vpH * 0.38) : Math.round(Math.max(lh * 0.9, vpH * 0.22));
+  const pb = Math.max(0, vpH - rl - lh);
+  pv.style.setProperty('--lh', lh + 'px'); pv.style.setProperty('--rl', rl + 'px'); pv.style.setProperty('--pb', pb + 'px');
+  const frac = maxPos > 0 ? pos / maxPos : 0;
+  const chH = ptext.scrollHeight;
+  maxPos = Math.max(0, chH - vpH);
+  const textH = Math.max(1, chH - rl - pb);
+  v = textH / nWords * (WPM[S.speed] / 60);
+  pos = clamp(frac * maxPos, 0, maxPos);
+  painted = -1; paint();
+  if (!(rec && rec.state === 'recording')) $('#stTime').textContent = clock(nWords / WPM[S.speed] * 60);
+  if (phase === 'setup') positionGuides();
+}
+function paint() {
+  if (pos === painted) return;
+  ptext.style.transform = 'translate3d(0,' + (-pos).toFixed(2) + 'px,0)';
+  $('#prog').style.transform = 'scaleX(' + (maxPos ? (pos / maxPos).toFixed(4) : 0) + ')';
+  painted = pos;
+}
+function setPlaying(on) {
+  playing = !!on && phase === 'read';
+  if (playing && pos >= maxPos - 0.5) pos = 0;
+  const b = $('#pPlay');
+  b.innerHTML = playing ? ICON.pause : ICON.play;
+  b.setAttribute('aria-label', playing ? 'עצירת הגלילה' : 'הפעלת הגלילה');
+}
+function startLoop() { if (!raf) { last = 0; raf = requestAnimationFrame(tick); } }
+function stopLoop() { cancelAnimationFrame(raf); raf = 0; }
+function tick(t) {
+  raf = requestAnimationFrame(tick);
+  const dt = last ? Math.min(0.1, (t - last) / 1000) : 0; last = t;
+  if (playing && !drag) { pos += v * dt; if (pos >= maxPos) { pos = maxPos; setPlaying(false); } }
+  paint();
+  if (analyser) meterTick();
+  if (rec && rec.state === 'recording' && t - lastClock > 250) { lastClock = t; $('#stTime').textContent = clock((performance.now() - recT0) / 1000); }
+}
+
+/* גרירה ונגיעה בטקסט */
+vp.addEventListener('pointerdown', e => {
+  if (actx && actx.state === 'suspended') actx.resume().catch(() => {});
+  drag = { id: e.pointerId, y: e.clientY, p: pos, moved: false };
+  try { vp.setPointerCapture(e.pointerId); } catch (err) {}
+});
+vp.addEventListener('pointermove', e => {
+  if (!drag || e.pointerId !== drag.id) return;
+  const dy = e.clientY - drag.y;
+  if (!drag.moved && Math.abs(dy) > 8) drag.moved = true;
+  if (drag.moved) { pos = clamp(drag.p - dy, 0, maxPos); paint(); }
+});
+const endDrag = e => { if (!drag || e.pointerId !== drag.id) return; const tap = !drag.moved && e.type === 'pointerup'; drag = null; if (tap) setPlaying(!playing); };
+vp.addEventListener('pointerup', endDrag);
+vp.addEventListener('pointercancel', endDrag);
+vp.addEventListener('wheel', e => { e.preventDefault(); pos = clamp(pos + e.deltaY, 0, maxPos); paint(); }, { passive: false });
+
+$('#pPlay').addEventListener('click', () => setPlaying(!playing));
+$('#pRestart').addEventListener('click', () => { pos = 0; paint(); if (!(rec && rec.state === 'recording')) setPlaying(false); });
+$('#pBack').addEventListener('click', goBack);
+$$('[data-step]').forEach(b => b.addEventListener('click', () => {
+  const k = b.dataset.step;
+  if (k === 'fs+') S.fontSize = clamp(S.fontSize + 2, 20, 72);
+  if (k === 'fs-') S.fontSize = clamp(S.fontSize - 2, 20, 72);
+  if (k === 'sp+') S.speed = clamp(S.speed + 1, 1, 10);
+  if (k === 'sp-') S.speed = clamp(S.speed - 1, 1, 10);
+  saveS(); applySettings();
+}));
+document.addEventListener('keydown', e => {
+  if (view !== 'prompter' || phase !== 'read' || e.target.closest('input,textarea') || !$('#sheet').hidden || !$('#review').hidden) return;
+  if (e.code === 'Space') { e.preventDefault(); setPlaying(!playing); }
+  else if (e.key === 'ArrowDown') { pos = clamp(pos + 40, 0, maxPos); paint(); }
+  else if (e.key === 'ArrowUp') { pos = clamp(pos - 40, 0, maxPos); paint(); }
+});
+
+/* קווי עזר */
+function positionGuides() {
+  if ($('#guides').hidden) return;
+  const W = window.innerWidth, H = window.innerHeight;
+  const vw = cam.videoWidth, vh = cam.videoHeight;
+  let x0 = 0, y0 = 0, w = W, h = H;
+  if (vw && vh) { const s = Math.max(W / vw, H / vh); w = vw * s; h = vh * s; x0 = (W - w) / 2; y0 = (H - h) / 2; }
+  const Y = f => clamp(y0 + h * f, 0, H), X = f => clamp(x0 + w * f, 0, W);
+  $('#gy1').style.top = Y(1 / 3) + 'px'; $('#gy2').style.top = Y(2 / 3) + 'px';
+  $('#gx1').style.left = X(1 / 3) + 'px'; $('#gx2').style.left = X(2 / 3) + 'px';
+  $('#eyeL').style.top = Y(1 / 3) + 'px';
+  const z = (TYPES[cur.type] || {}).zones;
+  const showZ = !!z && cur.orient === 'portrait' && H > W;
+  $('#zTop').hidden = $('#zBot').hidden = !showZ;
+  if (showZ) { $('#zTop').style.height = Y(z.top) + 'px'; $('#zBot').style.height = (H - Y(1 - z.bottom)) + 'px'; }
+}
+cam.addEventListener('loadedmetadata', () => { positionGuides(); });
+cam.addEventListener('resize', () => { positionGuides(); });
+
+/* כיוון הטלפון */
+let resizeT = 0;
+function checkOrientation() {
+  if (view !== 'prompter' || !cur) return;
+  const land = window.innerWidth > window.innerHeight;
+  const want = cur.orient === 'landscape';
+  const r = $('#rotate');
+  if (want === land || (rec && rec.state === 'recording')) { r.hidden = true; return; }
+  r.className = 'rotate ' + (want ? 'to-land' : 'to-port');
+  $('#rotTitle').textContent = want ? 'מסובבים את הטלפון לרוחב' : 'מסובבים את הטלפון לאורך';
+  $('#rotText').textContent = (want ? 'הסרטון הזה מצולם כשהטלפון שוכב.' : 'הסרטון הזה מצולם כשהטלפון עומד.') + ' אם המסך לא מסתובב, בודקים שנעילת הסיבוב כבויה.';
+  r.hidden = false;
+}
+function onResize() {
+  if (view !== 'prompter') return;
+  layout(); checkOrientation(); positionGuides();
+  clearTimeout(resizeT); resizeT = setTimeout(verifyAspect, 1000);
+}
+window.addEventListener('resize', onResize);
+if (screen.orientation && screen.orientation.addEventListener) screen.orientation.addEventListener('change', () => setTimeout(onResize, 80));
+function verifyAspect() {
+  if (!stream || !cam.videoWidth || !coarse || (rec && rec.state === 'recording')) return;
+  const land = window.innerWidth > window.innerHeight;
+  if ((cur.orient === 'landscape') !== land) return;
+  const vland = cam.videoWidth > cam.videoHeight;
+  if (vland !== land && !aspectFixTried) { aspectFixTried = true; startCamera(); }
+}
+
+/* ---------- מצלמה ---------- */
+function stopStream() { if (stream) { stream.getTracks().forEach(t => { try { t.stop(); } catch (e) {} }); } stream = null; cam.srcObject = null; }
+function camMsg(kind) {
+  const M = {
+    denied: ['אין גישה למצלמה', 'כדי לצלם צריך לאשר לפרומפטר גישה למצלמה ולמיקרופון. אם לא הופיעה בקשה, נוגעים בסמל שליד הכתובת בדפדפן, מאשרים מצלמה ומיקרופון, ואז ״ניסיון נוסף״.'],
+    busy: ['המצלמה תפוסה', 'אולי היא פתוחה באפליקציה אחרת. סוגרים אותה ונוגעים ב״ניסיון נוסף״.'],
+    notfound: ['לא נמצאה מצלמה', 'במכשיר הזה אין מצלמה שהדפדפן יכול לפתוח.'],
+    noapi: ['הדפדפן לא פותח את המצלמה', 'כדאי לפתוח את הקישור בכרום או בספארי.'],
+    insecure: ['צריך כתובת מאובטחת', 'המצלמה נפתחת רק בכתובת שמתחילה ב־https.'],
+    ended: ['המצלמה נסגרה', 'נוגעים ב״ניסיון נוסף״ כדי לפתוח אותה שוב.'],
+    other: ['המצלמה לא נפתחה', 'נוגעים ב״ניסיון נוסף״. אם זה חוזר, סוגרים את הדפדפן ופותחים מחדש.']
+  };
+  const m = M[kind] || M.other;
+  $('#cmTitle').textContent = m[0]; $('#cmText').textContent = m[1];
+  $('#cmRetry').hidden = kind === 'notfound' || kind === 'noapi' || kind === 'insecure';
+  $('#camMsg').hidden = false;
+}
+$('#cmRetry').addEventListener('click', () => { $('#camMsg').hidden = true; aspectFixTried = false; startCamera(); });
+$('#cmBack').addEventListener('click', goBack);
+
+async function startCamera() {
+  if (view !== 'prompter') return;
+  stopStream(); stopMeter();
+  if (!window.isSecureContext) { camMsg('insecure'); return; }
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) { camMsg('noapi'); return; }
+  const vid = { facingMode: 'user', width: { ideal: 1920 }, height: { ideal: 1080 }, frameRate: { ideal: 30 } };
+  const aud = { echoCancellation: false, noiseSuppression: true, autoGainControl: true };
+  let s = null;
+  try { s = await navigator.mediaDevices.getUserMedia({ video: vid, audio: aud }); hasAudio = true; }
+  catch (e) {
+    if (e && e.name === 'OverconstrainedError') {
+      try { s = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' }, audio: true }); hasAudio = true; } catch (e2) { e = e2; }
+    }
+    if (!s && e && e.name === 'NotAllowedError') {
+      try { s = await navigator.mediaDevices.getUserMedia({ video: vid }); hasAudio = false; toast('אין גישה למיקרופון, אז הסרטון יוקלט בלי קול.', 4200); } catch (e3) { e = e3; }
+    }
+    if (!s) {
+      const n = e && e.name;
+      camMsg(n === 'NotAllowedError' || n === 'SecurityError' ? 'denied' : n === 'NotReadableError' || n === 'AbortError' ? 'busy' : n === 'NotFoundError' ? 'notfound' : 'other');
+      return;
+    }
+  }
+  if (view !== 'prompter') { s.getTracks().forEach(t => t.stop()); return; }
+  stream = s;
+  cam.srcObject = s;
+  try { await cam.play(); } catch (e) {}
+  const vt = s.getVideoTracks()[0];
+  if (vt) vt.addEventListener('ended', () => { if (view === 'prompter' && stream === s) camMsg('ended'); });
+  $('#meterBox').hidden = !hasAudio;
+  if (hasAudio) startMeter();
+  $('#pRec').disabled = !window.MediaRecorder;
+  positionGuides();
+}
+
+/* מד עוצמה של המיקרופון */
+function startMeter() {
+  stopMeter();
+  try {
+    const AC = window.AudioContext || window.webkitAudioContext; if (!AC || !stream) return;
+    actx = new AC();
+    const src = actx.createMediaStreamSource(stream);
+    analyser = actx.createAnalyser(); analyser.fftSize = 1024;
+    src.connect(analyser); abuf = new Uint8Array(analyser.fftSize);
+    if (actx.state === 'suspended') actx.resume().catch(() => {});
+  } catch (e) { analyser = null; }
+}
+function stopMeter() { analyser = null; if (actx) { try { actx.close(); } catch (e) {} actx = null; } }
+function meterTick() {
+  analyser.getByteTimeDomainData(abuf);
+  let pk = 0; for (let i = 0; i < abuf.length; i += 4) { const a = Math.abs(abuf[i] - 128); if (a > pk) pk = a; }
+  level = Math.max(pk / 64, level * 0.9);
+  $('#meter').style.transform = 'scaleX(' + Math.min(1, level).toFixed(3) + ')';
+}
+
+/* המסך לא נכבה */
+async function lockScreen() { try { if ('wakeLock' in navigator) { wakeLock = await navigator.wakeLock.request('screen'); } } catch (e) {} }
+function releaseWake() { try { if (wakeLock) wakeLock.release(); } catch (e) {} wakeLock = null; }
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) { if (rec && rec.state === 'recording') stopRec(); setPlaying(false); }
+  else if (view === 'prompter') { lockScreen(); if (actx && actx.state === 'suspended') actx.resume().catch(() => {}); }
+});
+
+/* ---------- הקלטה ---------- */
+function pickMime() {
+  if (!window.MediaRecorder || !MediaRecorder.isTypeSupported) return '';
+  const list = ['video/mp4;codecs=avc1.640028,mp4a.40.2', 'video/mp4;codecs=avc1.4D401F,mp4a.40.2', 'video/mp4;codecs=avc1.42E01E,mp4a.40.2', 'video/mp4;codecs=avc1,mp4a', 'video/mp4;codecs=avc1,opus', 'video/mp4', 'video/webm;codecs=vp9,opus', 'video/webm;codecs=vp8,opus', 'video/webm'];
+  for (const m of list) { try { if (MediaRecorder.isTypeSupported(m)) return m; } catch (e) {} }
+  return '';
+}
+async function makeSink() {
+  if (navigator.storage && navigator.storage.getDirectory) {
+    try {
+      const dir = await navigator.storage.getDirectory();
+      try { for await (const name of dir.keys()) { if (name.startsWith('take-')) { try { await dir.removeEntry(name); } catch (e) {} } } } catch (e) {}
+      const name = 'take-' + Date.now();
+      const fh = await dir.getFileHandle(name, { create: true });
+      const ws = await fh.createWritable();
+      let q = Promise.resolve(), failed = false;
+      return {
+        push(b) { q = q.then(() => ws.write(b)).catch(() => { failed = true; }); },
+        async finish(type) { await q; try { await ws.close(); } catch (e) { failed = true; } if (failed) throw new Error('write'); const f = await fh.getFile(); return new Blob([f], { type }); }
+      };
+    } catch (e) {}
+  }
+  const parts = [];
+  return { push(b) { parts.push(b); }, async finish(type) { return new Blob(parts, { type }); } };
+}
+function setRecUI(on) {
+  const b = $('#pRec');
+  b.classList.toggle('on', on); b.classList.remove('arming');
+  b.setAttribute('aria-label', on ? 'עצירת ההקלטה' : 'הקלטה');
+  $('#prompterView').classList.toggle('recording', on);
+  $('#rdot').hidden = !on; $('#stIc').hidden = on;
+  if (!on && S) $('#stTime').textContent = clock(nWords / WPM[S.speed] * 60);
+}
+async function countdown(n) {
+  if (!n) return true;
+  counting = true; cancelCount = false;
+  const box = $('#countdown'); box.hidden = false; $('#pRec').classList.add('arming');
+  for (let i = n; i > 0; i--) {
+    box.innerHTML = '<b>' + i + '</b>';
+    for (let k = 0; k < 10; k++) { await sleep(100); if (cancelCount || view !== 'prompter') { counting = false; box.hidden = true; $('#pRec').classList.remove('arming'); return false; } }
+  }
+  counting = false; box.hidden = true; $('#pRec').classList.remove('arming');
+  return true;
+}
+$('#pRec').addEventListener('click', async () => {
+  if (counting) { cancelCount = true; return; }
+  if (rec && rec.state === 'recording') { stopRec(); return; }
+  if (!window.MediaRecorder) { toast('הדפדפן הזה לא יודע להקליט וידאו. כדאי לנסות בכרום.'); return; }
+  if (!stream) { toast('המצלמה עוד לא מוכנה.'); return; }
+  if (actx && actx.state === 'suspended') actx.resume().catch(() => {});
+  if (pos >= maxPos - 1) { pos = 0; paint(); }
+  setPlaying(false);
+  const ok = await countdown(S.countdown);
+  if (!ok || !stream || view !== 'prompter') return;
+  const mime = pickMime();
+  try {
+    sink = await makeSink();
+    const opts = { videoBitsPerSecond: (TYPES[cur.type] || TYPES.reel).kbps * 1000, audioBitsPerSecond: 128000 };
+    if (mime) opts.mimeType = mime;
+    try { rec = new MediaRecorder(stream, opts); } catch (e) { rec = new MediaRecorder(stream); }
+  } catch (e) { toast('לא הצלחתי להתחיל את ההקלטה.'); return; }
+  const r = rec, sk = sink;
+  r.ondataavailable = ev => { if (ev.data && ev.data.size) sk.push(ev.data); };
+  r.onerror = () => { toast('ההקלטה נעצרה בגלל תקלה.'); try { r.stop(); } catch (e) {} };
+  r.onstop = () => finishRec(r, sk);
+  try { r.start(1000); } catch (e) { toast('לא הצלחתי להתחיל את ההקלטה.'); rec = null; return; }
+  recT0 = performance.now(); lastClock = 0;
+  setRecUI(true);
+  $('#rotate').hidden = true;
+  setPlaying(true);
+});
+function stopRec() { setPlaying(false); if (rec && rec.state !== 'inactive') { try { rec.stop(); } catch (e) {} } }
+async function finishRec(r, sk) {
+  const dur = (performance.now() - recT0) / 1000;
+  setRecUI(false);
+  const type = (r.mimeType || pickMime() || 'video/webm').split(';')[0];
+  let blob = null;
+  try { blob = await sk.finish(type); } catch (e) { blob = null; }
+  if (rec === r) rec = null;
+  if (view !== 'prompter') return;
+  if (!blob || !blob.size) { toast('ההקלטה יצאה ריקה. כדאי לנסות שוב.'); return; }
+  if (take) { try { URL.revokeObjectURL(take.url); } catch (e) {} }
+  takeNo++;
+  take = { blob, url: URL.createObjectURL(blob), ext: /mp4/.test(type) ? 'mp4' : 'webm', type, dur, n: takeNo, saved: false };
+  openReview();
+}
+
+/* ---------- אחרי הצילום ---------- */
+function fileName() {
+  const d = new Date(), p = n => String(n).padStart(2, '0');
+  const t = (cur.title || 'סרטון').replace(/[\\/:*?"<>|״׳'…]+/g, '').replace(/\s+/g, ' ').trim().slice(0, 40) || 'סרטון';
+  return t + ' - טייק ' + take.n + ' - ' + p(d.getDate()) + '.' + p(d.getMonth() + 1) + ' ' + p(d.getHours()) + '-' + p(d.getMinutes()) + '.' + take.ext;
+}
+function takeFile() { return new File([take.blob], fileName(), { type: take.type }); }
+function canShare() { try { return !!(navigator.canShare && take && navigator.canShare({ files: [takeFile()] })); } catch (e) { return false; } }
+function openReview() {
+  $('#rvTitle').textContent = cur.title;
+  $('#rvMeta').textContent = 'טייק ' + take.n + ' · ' + clock(take.dur);
+  const vEl = $('#takeVideo'); vEl.src = take.url;
+  const share = canShare(), iosShare = isIOS && share;
+  $('#rvSave').innerHTML = (iosShare ? ICON.share : ICON.download) + '<span>שמירה בטלפון</span>';
+  $('#rvShare').innerHTML = ICON.share + '<span>שיתוף</span>';
+  $('#rvShare').hidden = !share || iosShare;
+  $('#rvNote').hidden = true;
+  $('#review').hidden = false;
+}
+async function shareTake() {
+  try { await navigator.share({ files: [takeFile()], title: cur.title }); take.saved = true; note('הסרטון יצא מהאפליקציה ✓'); }
+  catch (e) { if (!e || e.name !== 'AbortError') toast('השיתוף לא הצליח. אפשר לנסות ״שמירה בטלפון״.'); }
+}
+function note(t) { const n = $('#rvNote'); n.textContent = t; n.hidden = false; }
+$('#rvSave').addEventListener('click', () => {
+  if (!take) return;
+  if (isIOS && canShare()) { shareTake(); return; }
+  const a = document.createElement('a'); a.href = take.url; a.download = fileName(); a.rel = 'noopener';
+  document.body.append(a); a.click(); a.remove();
+  take.saved = true;
+  note('הסרטון נשמר בטלפון, בתיקיית ההורדות ✓');
+});
+$('#rvShare').addEventListener('click', () => { if (take) shareTake(); });
+async function okToDiscard() {
+  if (!take || take.saved) return true;
+  return ask('הטייק הזה עוד לא נשמר', 'אם ממשיכים, הוא יימחק.', 'להמשיך בלי לשמור', 'רגע, אשמור');
+}
+$('#rvRetake').addEventListener('click', async () => {
+  if (!(await okToDiscard())) return;
+  $('#review').hidden = true; $('#takeVideo').pause();
+  pos = 0; paint(); setPlaying(false);
+});
+$('#rvDone').addEventListener('click', async () => {
+  if (!(await okToDiscard())) return;
+  if (take) take.saved = true;
+  cur.done = true; saveScripts();
+  $('#review').hidden = true;
+  history.go(-2);
+});
+
+/* ---------- התאמת התצוגה ---------- */
+$('#pSet').addEventListener('click', openSheet);
+function rangeRow(label, key, min, max, step, fmt, hint) {
+  const w = el('div', 'set');
+  const top = el('div', 'top'); const o = el('output', null, fmt(S[key]));
+  top.append(el('span', null, label), o);
+  const r = el('input'); r.type = 'range'; r.min = min; r.max = max; r.step = step; r.value = S[key];
+  r.setAttribute('aria-label', label);
+  r.addEventListener('input', () => { S[key] = +r.value; o.textContent = fmt(S[key]); saveS(); applySettings(); });
+  w.append(top, r);
+  if (hint) w.append(el('small', null, hint));
+  return w;
+}
+function segRow(label, key, items) {
+  const w = el('div', 'set'); w.append(el('div', 'top', label));
+  const box = el('div', 'seg');
+  const draw = () => buildSeg(box, items, S[key], k => { S[key] = k; saveS(); applySettings(); draw(); });
+  draw(); w.append(box); return w;
+}
+function openSheet() {
+  const land = window.innerWidth > window.innerHeight;
+  $('#shSub').textContent = 'נשמר בנפרד לכל סוג סרטון. עכשיו: ' + (TYPES[cur.type] || TYPES.reel).name + ', ' + (cur.orient === 'portrait' ? 'לאורך' : 'לרוחב') + '.';
+  const b = $('#shBody'); b.textContent = '';
+  b.append(rangeRow('גודל הטקסט', 'fontSize', 20, 72, 2, x => x));
+  b.append(rangeRow('מהירות הגלילה', 'speed', 1, 10, 1, x => x));
+  if (land) b.append(rangeRow('רוחב אזור הטקסט', 'panel', 30, 70, 1, x => x + '%'));
+  else {
+    b.append(rangeRow('גובה אזור הטקסט', 'panel', 25, 75, 1, x => x + '%'));
+    b.append(rangeRow('רוחב השורה', 'width', 50, 100, 2, x => x + '%', 'שורה צרה יותר, והעיניים זזות פחות מצד לצד.'));
+  }
+  b.append(rangeRow('כהות הרקע מאחורי הטקסט', 'dim', 0, 90, 5, x => x + '%'));
+  b.append(segRow('יישור הטקסט', 'align', [['right', 'לימין'], ['center', 'למרכז']]));
+  if (land) b.append(segRow('צד הטקסט', 'side', [['auto', 'ליד המצלמה'], ['right', 'ימין'], ['left', 'שמאל']]));
+  b.append(segRow('ספירה לאחור לפני הקלטה', 'countdown', [[0, 'בלי'], [3, '3 שניות'], [5, '5 שניות']]));
+  const sw = el('label', 'set switch'); const cb = el('input'); cb.type = 'checkbox'; cb.checked = !!S.mirror;
+  cb.addEventListener('change', () => { S.mirror = cb.checked; saveS(); applySettings(); });
+  const st = el('span'); st.append('תצוגת מראה'); const sm = el('small', null, 'משנה רק את מה שרואים במסך. הסרטון נשמר כמו שאחרים רואים אותך.'); st.append(sm);
+  sw.append(st, cb); b.append(sw);
+  $('#sheet').hidden = false;
+}
+function closeSheet() { $('#sheet').hidden = true; }
+$('#shClose').addEventListener('click', closeSheet);
+$('#sheet').addEventListener('click', e => { if (e.target === $('#sheet')) closeSheet(); });
+$('#shGuides').addEventListener('click', () => { closeSheet(); setPhase('setup'); });
+$('#shReset').addEventListener('click', () => { delete allSettings[setKey(cur.type, cur.orient)]; store.set(K_SET, allSettings); S = sFor(cur.type, cur.orient); applySettings(); openSheet(); });
+
+/* ---------- התקנה ---------- */
+let installEvt = null;
+window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); installEvt = e; $('#installBox').hidden = false; });
+$('#installBtn').addEventListener('click', async () => { if (!installEvt) return; installEvt.prompt(); try { await installEvt.userChoice; } catch (e) {} installEvt = null; $('#installBox').hidden = true; });
+window.addEventListener('appinstalled', () => { $('#installBox').hidden = true; });
+if (isIOS && !isStandalone()) $('#iosHint').hidden = false;
+if ('serviceWorker' in navigator && location.protocol === 'https:') navigator.serviceWorker.register('sw.js').catch(() => {});
+
+/* ---------- התחלה ---------- */
+history.replaceState({ v: 'library' }, '');
+renderList();
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { if (view === 'prompter') layout(); });
+})();
+</script>
+</body>
+</html>
