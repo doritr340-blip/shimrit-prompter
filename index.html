@@ -43,7 +43,7 @@ svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-l
 .tools{display:flex;align-items:center;gap:8px;margin:10px 0 0;flex-wrap:wrap}
 .tools .count{margin-inline-start:auto;font-size:14px;color:var(--muted)}
 .hint{font-size:14px;color:var(--muted);margin:10px 4px 0;line-height:1.55}
-.install{display:flex;align-items:center;gap:12px;background:#fff;border-radius:16px;padding:10px 12px;margin:14px 0 0;font-size:14.5px;line-height:1.45;color:#55556a}
+.brand .inst{margin-inline-start:auto;flex:none}
 .dock{position:fixed;left:0;right:0;bottom:0;padding:14px 16px calc(14px + var(--sb));background:linear-gradient(rgba(254,244,234,0),var(--cream) 40%);display:flex;justify-content:center;z-index:5}
 .btn{min-height:52px;border-radius:999px;padding:0 24px;font-weight:800;font-size:17px;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:transform .1s;white-space:nowrap}
 .btn:active{transform:scale(.97)}
@@ -133,6 +133,7 @@ svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-l
         <h1>הפרומפטר של שמרית</h1>
         <p>מדביקים טקסט או כותבים, ומצלמים כשהוא רץ ליד העדשה.</p>
       </div>
+      <button id="installBtn" class="btn ghost sm inst" type="button" hidden>התקנה</button>
     </div>
     <textarea id="txt" class="ta" placeholder="מדביקים כאן דף טקסטים, או כותבים בעצמך" aria-label="הטקסט לצילום"></textarea>
     <div class="tools">
@@ -141,10 +142,6 @@ svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-l
       <span id="count" class="count"></span>
     </div>
     <p id="startHint" class="hint" hidden>רוצה להתחיל מאמצע הדף? נוגעים בשורה שממנה מתחילים, ואז ״לצילום״.</p>
-    <div id="installBox" class="install" hidden>
-      <span>אפשר להתקין את הפרומפטר כאפליקציה, והוא ייפתח מסמל במסך הבית.</span>
-      <button id="installBtn" class="btn ghost sm" type="button">התקנה</button>
-    </div>
     <p id="iosHint" class="hint" hidden>כדי לפתוח את הפרומפטר מסמל במסך הבית: בספארי לוחצים על כפתור השיתוף, ואז על הוספה למסך הבית.</p>
   </div>
   <div class="dock"><button id="goBtn" class="btn primary wide" type="button"></button></div>
@@ -732,9 +729,9 @@ $('#rvRetake').addEventListener('click', async () => {
 
 /* ---------- התקנה ---------- */
 let installEvt = null;
-window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); installEvt = e; $('#installBox').hidden = false; });
-$('#installBtn').addEventListener('click', async () => { if (!installEvt) return; installEvt.prompt(); try { await installEvt.userChoice; } catch (e) {} installEvt = null; $('#installBox').hidden = true; });
-window.addEventListener('appinstalled', () => { $('#installBox').hidden = true; });
+window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); installEvt = e; $('#installBtn').hidden = false; });
+$('#installBtn').addEventListener('click', async () => { if (!installEvt) return; installEvt.prompt(); try { await installEvt.userChoice; } catch (e) {} installEvt = null; $('#installBtn').hidden = true; });
+window.addEventListener('appinstalled', () => { $('#installBtn').hidden = true; });
 if (isIOS && !isStandalone()) $('#iosHint').hidden = false;
 if ('serviceWorker' in navigator && location.protocol === 'https:') navigator.serviceWorker.register('sw.js').catch(() => {});
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { if (view === 'cam') layout(); });
